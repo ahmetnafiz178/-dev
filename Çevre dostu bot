@@ -1,0 +1,23 @@
+import discord
+import os
+
+# ayricaliklar (intents) değişkeni botun ayrıcalıklarını depolayacak
+intents = discord.Intents.default()
+# Mesajları okuma ayrıcalığını etkinleştirelim
+intents.message_content = True
+# client (istemci) değişkeniyle bir bot oluşturalım ve ayrıcalıkları ona aktaralım
+client = discord.Client(intents=intents)
+
+@client.event
+async def on_ready():
+    print(f'{client.user} olarak giriş yaptık.')
+
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+    if message.content.startswith('Bana geri dönüşüm hakkında bilgi ver'):
+        await message.channel.send("Geri dönüşüm, kullanılmış ve bir daha kullanılmayacak olan maddelerin tekrar işlenmesi ve tüketici ile yeniden buluşmasına verilen isimdir. Geri dönüşüm maddelerini; plastik şişeler, araba lastikleri, kırık cam parçaları, meral parçalar ve özetle tüm kullanım ömrünü doldurmuş maddeler olarak verebiliriz.")
+    elif message.content.startswith('Çöplerimi nasıl değerlendirebilirim?'):
+        await message.channel.send("Mesela bir geri dönüşüm poşeti oluşturun. Gıda olanları komposta, geri dönüşümü olmayanları normal çöplere atabiirsiniz.")
+client.run("BOT TOKENI BURAYA")
